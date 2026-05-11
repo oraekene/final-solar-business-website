@@ -21,6 +21,7 @@ export default function Navbar() {
     { name: 'Our Powerstations', path: '/products/flagship' },
     { name: 'Solar Products', path: '/products/solar' },
     { name: 'Accessories', path: '/products/internet' },
+    { name: 'Installation', path: '/installation' },
     { name: 'Blog', path: '/blog' },
     { name: 'Solar Sizer', path: '/solar-sizer' },
   ];
