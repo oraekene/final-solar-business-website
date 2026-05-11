@@ -6,6 +6,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import { ProductProvider } from './contexts/ProductContext';
+import { CartProvider } from './contexts/CartContext';
 
 // Page imports
 import Home from './pages/Home';
@@ -15,6 +16,7 @@ import ProductInternet from './pages/ProductInternet';
 import Installation from './pages/Installation';
 import Blog from './pages/Blog';
 import Order from './pages/Order';
+import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import SolarSizer from './pages/SolarSizer';
 
@@ -22,19 +24,22 @@ export default function App() {
   return (
     <BrowserRouter>
       <ProductProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products/flagship" element={<ProductFlagship />} />
-            <Route path="/products/solar" element={<ProductSolar />} />
-            <Route path="/products/internet" element={<ProductInternet />} />
-            <Route path="/installation" element={<Installation />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/solar-sizer" element={<SolarSizer />} />
-          </Routes>
-        </Layout>
+        <CartProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products/flagship" element={<ProductFlagship />} />
+              <Route path="/products/solar" element={<ProductSolar />} />
+              <Route path="/products/internet" element={<ProductInternet />} />
+              <Route path="/installation" element={<Installation />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/order" element={<Order />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/solar-sizer" element={<SolarSizer />} />
+            </Routes>
+          </Layout>
+        </CartProvider>
       </ProductProvider>
     </BrowserRouter>
   );

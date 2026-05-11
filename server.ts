@@ -10,15 +10,46 @@ async function startServer() {
 
   // API Route Stubs
   app.post("/api/orders", (req, res) => {
-    res.json({ message: "Order creation stub", success: true });
+    try {
+      const { items, total } = req.body;
+      // Logic for saving order to DB would go here
+      console.log(`Order received: ₦${total}`, items);
+      res.status(201).json({ 
+        message: "Order initiated successfully", 
+        orderId: `S1-${Math.random().toString(36).substr(2, 9).toUpperCase()}` 
+      });
+    } catch (error) {
+      res.status(400).json({ error: "Failed to create order" });
+    }
   });
 
   app.post("/api/payments/initiate", (req, res) => {
-    res.json({ status: "success", authorization_url: "https://paystack.com/..." });
+    const { amount, email, metadata } = req.body;
+    
+    // In a real implementation:
+    // const response = await axios.post('https://api.paystack.co/transaction/initialize', { amount, email, metadata }, { headers });
+    
+    console.log(`Initiating Paystack for ${email}: ₦${amount}`);
+    
+    res.json({ 
+      status: "success", 
+      authorization_url: "https://checkout.paystack.com/0p9q8r7s6t5u4v3w2x1y", // Mock Paystack Checkout
+      reference: `REF-${Date.now()}`
+    });
   });
 
   app.post("/api/webhooks/paystack", (req, res) => {
-    // Paystack Webhook Handler
+    // Validate Paystack Signature
+    // const hash = crypto.createHmac('sha512', process.env.PAYSTACK_SECRET).update(JSON.stringify(req.body)).digest('hex');
+    // if (hash !== req.headers['x-paystack-signature']) return res.sendStatus(400);
+
+    const event = req.body;
+    console.log('Paystack Webhook Received:', event.event);
+
+    if (event.event === 'charge.success') {
+      // Update order status in DB
+    }
+
     res.sendStatus(200);
   });
 
