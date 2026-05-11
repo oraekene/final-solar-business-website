@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #D4AF37;
+  --color-secondary: #FFD700;
+  --color-neutral: #121212;
+  --color-surface-elevated: #1E1E1E;
+  --color-surface-dim: #131313;
+  --color-border-subtle: #2A2A2A;
+  
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --radius-subtle: 1px;
+}
+
+:root {
+  background-color: var(--color-neutral);
+  color: white;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+}
+
+@layer base {
+  body {
+    @apply bg-neutral text-white antialiased;
+  }
+}
+
+/* Custom styles for Gilded Modernism */
+.lux-border {
+  @apply border border-white/10;
+}
+
+.gold-gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] to-[#FFD700];
+}
+
+.waitlist-badge {
+  @apply bg-primary/20 text-primary border border-primary/30 px-2 py-0.5 rounded-full text-[10px] uppercase font-black tracking-widest;
+}
+
+.button-primary {
+  @apply bg-primary hover:bg-secondary text-neutral font-bold rounded-subtle transition-all active:scale-95 flex items-center justify-center;
+}
